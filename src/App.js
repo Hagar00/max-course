@@ -1,24 +1,46 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import AddNew from './Components/AddNew/AddNew';
+// import Filter from './Components/Filter';
+
+// import MainTable from './mainTable/MainTable';
+import TestOne from './Components/TestOne';
+
+const data = [
+    {
+      title: "car insurance",
+      amount: 200,
+      date : new Date(Date.UTC(2023,6,25))
+    },
+    {
+      title:"hagar developer",
+      amount: 300,
+      date: new Date(Date.UTC(2023,7,1))
+    }
+  ]
+
 
 function App() {
+
+  const [newItem, setNewItem]= useState(data);
+
+  function addDataHandler(item){
+   console.log("data added");
+   setNewItem((prevItem)=>{
+    return [item, ...prevItem]
+   })
+   
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <MainTable></MainTable>
+    <>
+      <AddNew onAddData={addDataHandler}></AddNew>
+      <TestOne data={newItem}></TestOne>
+    </>
+    
+    
   );
 }
 
